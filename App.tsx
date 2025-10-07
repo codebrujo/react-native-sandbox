@@ -1,42 +1,32 @@
-import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, TextInput, View, Button, Alert, Dimensions } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Alert,
+  Dimensions,
+  ImageBackground,
+} from "react-native";
+import { Colors } from "./shared/tokens";
+import { Button } from "./shared/altButton/altButton";
 
 export default function App() {
-  const width = Dimensions.get('window').width
+  const width = Dimensions.get("window").width;
   return (
     <View style={styles.container}>
-      <View style={styles.top}>
-        <Text>Hey!</Text>
-        <Button
-          title="Press me"
-          onPress={() => Alert.alert("Simple Button pressed")}
-        />
+      <ImageBackground
+        source={require("./assets/cup.png")}
+        resizeMode="cover"
+        style={styles.image}
+      ></ImageBackground>
+      <View style={styles.content}>
+        <Text style={styles.text}>Одно из самых вкусных кофе в городе!</Text>
+        <Text style={styles.textSecondary}>
+          Свежие зёрна, настоящая арабика и бережная обжарка
+        </Text>
+        <View style={styles.form}>
+          <Button text="Начать" onPress={() => Alert.alert("Начать")} />
+        </View>
       </View>
-      <View
-        style={{
-          flexDirection: "row",
-          backgroundColor: "yellow",
-          alignItems: "center",
-          justifyContent: "space-around",
-          height: '70%',
-          gap: 10,
-        }}
-      >
-        <View
-          style={{ backgroundColor: "tomato", flexBasis: 100, flexGrow: 1, height: 100 }}
-        ></View>
-        <View
-          style={{ backgroundColor: "blue", flexBasis: 100, flexGrow: 1, height: 100 }}
-        ></View>
-        <View
-          style={{ backgroundColor: "green", width: (width / 2) - 5, height: 100 }}
-        ></View>
-      </View>
-      <Text style={styles.textStyle}>
-        Open up App.tsx to start working on your app!
-      </Text>
-      <TextInput defaultValue="input" />
-      <StatusBar style="auto" />
     </View>
   );
 }
@@ -44,16 +34,32 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
+    fontFamily: "Sora",
     justifyContent: "center",
   },
-  top: {
-    flexDirection: "row",
-    width: "100%",
-    textAlignVertical: "center",
-    justifyContent: "space-around",
-    alignItems: "center",
+  content: {
+    gap: 45,
+    paddingHorizontal: 55,
+    paddingBottom: 55,
+    backgroundColor: "black",
   },
-  textStyle: { color: "blue", fontSize: 20 },
+  form: {
+    alignSelf: "stretch",
+    gap: 16,
+  },
+  image: {
+    flex: 1,
+  },
+  text: {
+    fontSize: 34,
+    fontWeight: "semibold",
+    textAlign: "center",
+    color: Colors.white,
+  },
+  textSecondary: {
+    fontSize: 14,
+    fontWeight: "regular",
+    textAlign: "center",
+    color: Colors.white,
+  },
 });
