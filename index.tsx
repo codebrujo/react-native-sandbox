@@ -2,24 +2,45 @@ import {
   StyleSheet,
   Text,
   View,
-  Button,
   Alert,
   Dimensions,
+  ImageBackground,
 } from "react-native";
+import { Colors } from "./shared/tokens";
+import { Button } from "./shared/altButton/altButton";
 
 export default function App() {
   const width = Dimensions.get("window").width;
   return (
     <View style={styles.container}>
+      <ImageBackground
+        source={require("./assets/cup.png")}
+        resizeMode="cover"
+        style={styles.image}
+      ></ImageBackground>
       <View style={styles.content}>
         <Text
-          style={{ fontSize: 34, fontWeight: "semibold", textAlign: "center" }}
+          style={{
+            fontSize: 34,
+            fontWeight: "semibold",
+            textAlign: "center",
+            color: Colors.white,
+          }}
         >
           Одно из самых вкусных кофе в городе!
         </Text>
-        <Text style={{ fontSize: 14, fontWeight: "regular", textAlign: "center" }}>Свежие зёрна, настоящая арабика и бережная обжарка</Text>
+        <Text
+          style={{
+            fontSize: 14,
+            fontWeight: "regular",
+            textAlign: "center",
+            color: Colors.white,
+          }}
+        >
+          Свежие зёрна, настоящая арабика и бережная обжарка
+        </Text>
         <View style={styles.form}>
-          <Button title="Начать" onPress={() => Alert.alert("Начать")} />
+          <Button text="Начать" onPress={() => Alert.alert("Начать")} />
         </View>
       </View>
     </View>
@@ -28,17 +49,21 @@ export default function App() {
 
 const styles = StyleSheet.create({
   container: {
-    justifyContent: "center",
     flex: 1,
-    padding: 55,
-    fontFamily: 'Sora'
+    fontFamily: "Sora",
+    justifyContent: "center",
   },
   content: {
-    alignItems: "center",
-    gap: 50,
+    gap: 45,
+    paddingHorizontal: 55,
+    paddingBottom: 55,
+    backgroundColor: 'black',
   },
   form: {
     alignSelf: "stretch",
     gap: 16,
+  },
+  image: {
+    flex: 1,
   },
 });
