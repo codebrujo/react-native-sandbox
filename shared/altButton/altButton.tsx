@@ -1,12 +1,39 @@
-import { StyleSheet, Text, Pressable, PressableProps, View } from "react-native";
+import { StyleSheet, Text, Pressable, PressableProps, View, Animated, GestureResponderEvent } from "react-native";
 import { Colors, Fonts, Radius } from "../tokens";
 
 export function Button({ text, ...props }: PressableProps & { text: string }) {
+    const animatedValue = new Animated.Value(100);
+    const color = animatedValue.interpolate({
+      inputRange: [0, 100],
+      outputRange: [Colors.primaryHover, Colors.altButton],
+    });
+    const fadeIn = (e: GestureResponderEvent) => {
+      Animated.timing(animatedValue, {
+        toValue: 0,
+        duration: 50,
+        useNativeDriver: true,
+      }).start();
+      props.onPressIn?.(e)
+    }
+    const fadeOut = (e: GestureResponderEvent) => {
+      Animated.timing(animatedValue, {
+        toValue: 100,
+        duration: 50,
+        useNativeDriver: true,
+      }).start();
+      props.onPressOut?.(e)
+    };
+  
   return (
-    <Pressable {...props}>
-      <View style={styles.button}>
+    <Pressable {...props} onPressIn={fadeIn} onPressOut={fadeOut}>
+      <Animated.View
+        style={{
+          ...styles.button,
+          backgroundColor: color,
+        }}
+      >
         <Text style={styles.text}>{text}</Text>
-      </View>
+      </Animated.View>
     </Pressable>
   );
 }
@@ -15,7 +42,6 @@ const styles = StyleSheet.create({
   button: {
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: Colors.altButton,
     borderRadius: Radius.r10,
     height: 58,
   },
