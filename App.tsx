@@ -8,6 +8,7 @@ import {
 } from "react-native";
 import { Colors } from "./shared/tokens";
 import { Button } from "./shared/altButton/altButton";
+import { Header } from "./shared/altHeader/Header";
 
 export default function App() {
   const width = Dimensions.get("window").width;
@@ -19,7 +20,7 @@ export default function App() {
         style={styles.image}
       ></ImageBackground>
       <View style={styles.content}>
-        <Text style={styles.text}>Одно из самых вкусных кофе в городе!</Text>
+        <Header text={"Одно из самых вкусных кофе в городе!"} />
         <Text style={styles.textSecondary}>
           Свежие зёрна, настоящая арабика и бережная обжарка
         </Text>
@@ -49,12 +50,6 @@ const styles = StyleSheet.create({
   },
   image: {
     flex: 1,
-  },
-  text: {
-    fontSize: 34,
-    fontWeight: "semibold",
-    textAlign: "center",
-    color: Colors.white,
   },
   textSecondary: {
     fontSize: 14,
